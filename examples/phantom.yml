@@ -1,0 +1,55 @@
+---
+name: phantom
+director_uuid: <%= `bosh status --uuid`.strip %>
+
+releases:
+  - name: phantom
+    version: latest
+
+compilation:
+  network: default
+  reuse_compilation_vms: true
+  workers: 1
+  cloud_properties:
+    name: random
+
+update:
+  canaries: 0
+  canary_watch_time: 1000-180000
+  max_in_flight: 50
+  serial: true
+  update_watch_time: 1000-180000
+
+networks:
+- name: default
+  subnets:
+    - range: 10.244.2.0/30
+      reserved:
+        - 10.244.2.1
+      static: []
+      cloud_properties:
+        name: random
+
+resource_pools:
+- name: default
+  network: default
+  cloud_properties:
+    name: random
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
+
+jobs:
+
+- name: phantom
+  instances: 1
+  templates:
+  - name: phantom
+  resource_pool: default
+  networks:
+    - name: default
+
+properties:
+  network: default
+  networks:
+    apps: default

@@ -1,0 +1,13 @@
+---
+name: phantom
+
+templates:
+  foo: bar
+
+
+packages:
+
+
+properties:
+  foo:
+    description: "Nothing but bar"
