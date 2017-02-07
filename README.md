@@ -5,6 +5,7 @@ I needed a plain VM based on a given stemcell so I could tinker around and devel
 # How?
 
 Clone this repo. Target director. Upload desired stemcell to your BOSH director. Adjust deployment manifest accordingly.
+Note: if your creating the release for the first time, it will ask you for a name. Just call it phantom.
 ```
 $ bosh create release --force --with-tarball
 $ bosh upload release --rebase
